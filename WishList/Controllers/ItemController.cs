@@ -15,6 +15,7 @@ namespace WishList.Controllers
 		    _context = context;
 	    }
 
+		[HttpGet]
 	    public IActionResult Index()
 	    {
 		    var items =_context.Items.ToList();
@@ -32,7 +33,8 @@ namespace WishList.Controllers
 
 	    public IActionResult Delete(int Id)
 	    {
-		    _context.Remove(Id);
+		    var itemToDelete = _context.Items.Find(Id);
+		    _context.Remove(itemToDelete);
 		    _context.SaveChanges();
 
 		   return RedirectToAction("Index");
